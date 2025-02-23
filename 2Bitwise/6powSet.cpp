@@ -17,5 +17,4 @@ int main() {
     string s = "abc";
     printPowerSet(s);
     return 0;
-   return 0;
 }
