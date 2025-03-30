@@ -39,7 +39,7 @@ int main() {
 For example:
 
 Input: arr[] = {16, 17, 4, 3, 5, 2},
-Output: 17, 5, 2
+Output: 17, 5, 5
 
 Input: arr[] = {1, 2, 3, 4, 5, 2},
 Output: 5, 2
