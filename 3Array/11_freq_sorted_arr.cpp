@@ -83,6 +83,9 @@ int main() {
   printFreq(arr, N);
 
   cout << "Hi Aakash lets start with neovim" << endl;
+  if constexpr (true) { // 'if constexpr' is a C++17 feature
+    std::cout << "Compiled with C++17 or higher!" << std::endl;
+  }
   return 0;
 }
 
