@@ -69,7 +69,6 @@ Follow the steps below to solve the problem:
 -maxProfit = 0
 -if price[i] > price[i – 1]
   maxProfit = maxProfit + price[i] – price[i – 1]
-
 Time Complexity: O(n), Traversing over the array of size n
 Auxiliary Space: O(1)
 
