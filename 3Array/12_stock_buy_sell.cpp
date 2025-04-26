@@ -64,8 +64,7 @@ from the current element so that the difference keeps increasing until we reach
 a minimum. If the sequence is a decreasing sequence, so the maximum profit
 possible is 0.
 
-Follow the steps below to solve the problem:
-
+Follow the steps below to solve the problems
 -maxProfit = 0
 -if price[i] > price[i – 1]
   maxProfit = maxProfit + price[i] – price[i – 1]
