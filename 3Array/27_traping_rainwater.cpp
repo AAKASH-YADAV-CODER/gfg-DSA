@@ -32,11 +32,37 @@ int trap(const vector<int>& height) {
     return water;
 }
 
+int trapNaive(vector<int>& height) {
+    int n = height.size();
+    int waterTrapped = 0; // Initialize water trapped to 0
+
+    // Loop through each bar
+    for (int i = 0; i < n; i++) {
+        // Find the maximum height on the left
+        int leftMax = 0;
+        for (int j = 0; j <= i; j++) {
+            leftMax = max(leftMax, height[j]); // Update leftMax
+        }
+
+        // Find the maximum height on the right
+        int rightMax = 0;
+        for (int j = i; j < n; j++) {
+            rightMax = max(rightMax, height[j]); // Update rightMax
+        }
+
+        // Water trapped on top of the current bar is:
+        waterTrapped += min(leftMax, rightMax) - height[i]; // Calculate trapped water
+    }
+
+    return waterTrapped; // Return total water trapped
+}
+
 int main() {
     vector<int> height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
 
     // Call the function and print the result
-    int totalWater = trap(height);
+    // int totalWater = trap(height);
+    int totalWater = trapNaive(height);
     cout << "Total trapped rainwater: " << totalWater << endl;
 
     return 0;
