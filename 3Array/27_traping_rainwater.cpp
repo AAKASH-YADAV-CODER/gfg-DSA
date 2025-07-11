@@ -54,7 +54,7 @@ int trapNaive(vector<int>& height) {
         waterTrapped += min(leftMax, rightMax) - height[i]; // Calculate trapped water
     }
 
-    return waterTrapped; // Return total water trapped
+    return waterTrapped; 
 }
 
 int main() {
