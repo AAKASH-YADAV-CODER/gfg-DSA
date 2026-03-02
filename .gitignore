@@ -1,6 +1,12 @@
 # Prerequisites
-*.d
+# Ignore all files
 *
+
+# Un-ignore files that have an extension (like .cpp, .md)
+!*.*
+
+# Un-ignore directories (so git can recurse into them)
+!*/
 # Compiled Object files
 *.slo
 *.lo
