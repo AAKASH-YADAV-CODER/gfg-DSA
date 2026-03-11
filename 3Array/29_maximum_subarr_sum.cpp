@@ -18,7 +18,6 @@ using namespace std;
  * Time Complexity:  O(n^2)
  *   - For each of n starting positions i, we may run the inner loop up to n times.
  *   - So total iterations ≈ n * n = n^2.
- *
  * Space Complexity: O(1) — we only use a few variables (res, curr, i, j).
  */
 
