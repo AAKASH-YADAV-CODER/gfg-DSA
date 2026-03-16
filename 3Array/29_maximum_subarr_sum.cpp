@@ -29,7 +29,7 @@ int maxSubArrSum(int arr[], int n) {
   for (int i = 0; i < n; i++) {
     int curr = 0;  // Sum of the current subarray [i ... j]
 
-    // Extend the subarray from start i to every possible END (index j)
+    // Extend the subarray from start i to every possible END (index j).
     for (int j = i; j < n; j++) {
       curr = curr + arr[j];           // Add next element to current subarray sum
       res = max(res, curr);           // Update best result if this subarray is better
