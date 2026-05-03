@@ -32,26 +32,56 @@ Array: [2,  3,  -8,  7,  -1,  2,  3]
 ❌ Not contiguous: [2, 7, 3] (we skipped -8, -1, 2 — so there are gaps).
  */
 
+// int maxSubArrSum(int arr[], int n) {
+//   // Start with the first element as our best sum so far (in case array has one element or all negative)
+//   int res = arr[0];
+
+//   // Try every possible START of a subarray (index i)
+//   for (int i = 0; i < n; i++) {
+//     int curr = 0;  // Sum of the current subarray [i ... j]
+
+//     // Extend the subarray from start i to every possible END (index j).
+//     for (int j = i; j < n; j++) {
+//       curr = curr + arr[j];           // Add next element to current subarray sum
+//       res = max(res, curr);           // Update best result if this subarray is better
+//     }
+//   }
+//   return res;
+// }
+
+
+
+//Efficient solution in O(n) time and O(1) space
 int maxSubArrSum(int arr[], int n) {
-  // Start with the first element as our best sum so far (in case array has one element or all negative)
+  // res = best (maximum) subarray sum found so far.
   int res = arr[0];
 
-  // Try every possible START of a subarray (index i)
-  for (int i = 0; i < n; i++) {
-    int curr = 0;  // Sum of the current subarray [i ... j]
+  // maxEnd = best subarray sum that MUST end at current index.
+  int maxEnd = arr[0];
 
-    // Extend the subarray from start i to every possible END (index j).
-    for (int j = i; j < n; j++) {
-      curr = curr + arr[j];           // Add next element to current subarray sum
-      res = max(res, curr);           // Update best result if this subarray is better
-    }
+  // Start from i = 1 because index 0 is already used to initialize res and maxEnd.
+  for (int i = 1; i < n; i++) {
+    /*
+     * At each element arr[i], we have 2 choices:
+     * 1) Extend previous subarray: maxEnd + arr[i]
+     * 2) Start fresh from current element: arr[i]
+     *
+     * We pick the larger one.
+     * In simple words:
+     * "If previous running sum is helpful, carry it forward.
+     *  Otherwise, drop it and start new subarray from arr[i]."
+     */
+    maxEnd = max(maxEnd + arr[i], arr[i]);
+
+    // Update global best answer if current ending sum is better.
+    res = max(res, maxEnd);
   }
   return res;
 }
 
 int main() {
-  int arr[] = {2, 3, -8, 7, -1, 2, 3};
-  // int arr[] = {5, 8, 3};
+  // int arr[] = {2, 3, -8, 7, -1, 2, 3};
+  int arr[] = {5, 8, 3};
   int n = sizeof(arr) / sizeof(arr[0]);
   int maxarr = maxSubArrSum(arr, n);
   cout << "max subarray sum is -> " << maxarr << endl;
