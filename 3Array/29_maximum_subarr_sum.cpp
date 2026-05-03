@@ -19,6 +19,17 @@ using namespace std;
  *   - For each of n starting positions i, we may run the inner loop up to n times.
  *   - So total iterations ≈ n * n = n^2.
  * Space Complexity: O(1) — we only use a few variables (res, curr, i, j)
+ * 
+
+ What “contiguous” means
+
+Contiguous = one continuous block in the array. You’re allowed only to take a segment of the array: some start index and some end index, with no gaps in between.
+So for:
+
+Index:  0   1    2   3    4   5   6
+Array: [2,  3,  -8,  7,  -1,  2,  3]
+✅ Contiguous: [7, -1, 2, 3] (indices 3,4,5,6 — next to each other).
+❌ Not contiguous: [2, 7, 3] (we skipped -8, -1, 2 — so there are gaps).
  */
 
 int maxSubArrSum(int arr[], int n) {
