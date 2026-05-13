@@ -13,9 +13,23 @@ using namespace std;
  *
  * Time: O(n^2) in worst case (nested loops).
  * Space: O(1).
+ *
+ * ---------- EFFICIENT (single pass) — Kadane-style idea ----------
+ * Same spirit as Kadane's algorithm for max subarray SUM: here we track the
+ * best valid subarray ENDING at the current index (curr = length), not a sum.
+ * Walk the array once from left to right (index i = 1 .. n-1).
+ * Keep "curr" = length of the alternating segment that ENDS at index i.
+ * - If arr[i] and arr[i-1] have different parity (one even, one odd), the
+ *   pattern continues: curr grows by 1 (like extending the same subarray).
+ * - If they are BOTH even or BOTH odd, the old segment cannot continue;
+ *   start fresh: curr = 1 (only arr[i] counts for the new segment).
+ * "res" always stores the best curr we have seen so far.
+ *
+ * Time: O(n) — one loop.
+ * Space: O(1).
  */
 
-int maxEvenOddSubarray(int arr[], int n) {
+int maxEvenOddSubarrayNaive(int arr[], int n) {
   // At least one element counts as a subarray of length 1 (single number is "trivially" ok).
   int res = 1;
 
@@ -42,8 +56,30 @@ int maxEvenOddSubarray(int arr[], int n) {
   return res;  // Longest alternating even-odd subarray length found.
 }
 
+// Efficient solution: Kadane-style — one left-to-right scan (same logic as naive, no inner loop).
+int maxEvenOddSubarray(int arr[], int n) {
+  // Best length seen anywhere (Kadane: global best). At least 1 when n >= 1.
+  int res = 1;
+
+  // Length of best alternating subarray that ENDS at current index (Kadane: best ending here).
+  int curr = 1;
+
+  // Start from i = 1: compare each element with its left neighbour arr[i-1].
+  for (int i = 1; i < n; i++) {
+    // Same check as naive: neighbours must be one even, one odd (either order).
+    if ((arr[i] % 2 == 0 && arr[i - 1] % 2 != 0) ||
+        (arr[i] % 2 != 0 && arr[i - 1] % 2 == 0)) {
+      curr++;                    // Alternation continues: extend the running segment.
+      res = max(res, curr);      // Maybe this longer segment is the new global best.
+    } else {
+      curr = 1;  // Pattern broke (two evens or two odds in a row). New segment is only arr[i].
+    }
+  }
+  return res;
+}
+
 int main() {
-  int arr[] = {6, 5, 4, 3, 2, 1};
+  int arr[] = {6, 5, 4, 3, 2, 1,4};
   int n = sizeof(arr) / sizeof(arr[0]);
   cout << "Maximum length of even odd subarray is " << maxEvenOddSubarray(arr, n) << endl;
   return 0;
